@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vapor - Pomodoro Timer</title>
+<link rel="stylesheet" href="style.css">
+<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+</head>
+<body data-mode="pomodoro">
+
+<div class="app">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand"><span class="brand-dot" id="brandDot"></span>Vapor</div>
+    <button class="icon-btn" id="settingsBtn" aria-label="Open settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="3.2"/>
+        <path d="M19.4 13.5c.04-.5.04-1 0-1.5l1.9-1.5-2-3.5-2.3.9c-.4-.3-.8-.6-1.3-.8L15.3 4h-4l-.4 2.6c-.5.2-.9.5-1.3.8l-2.3-.9-2 3.5 1.9 1.5c-.04.5-.04 1 0 1.5L5 14.9l2 3.5 2.3-.9c.4.3.8.6 1.3.8l.4 2.6h4l.4-2.6c.5-.2.9-.5 1.3-.8l2.3.9 2-3.5-1.9-1.4z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mode Tabs -->
+  <div class="tabs" id="tabs">
+    <div class="tab-slider" id="tabSlider"></div>
+    <button class="tab active" data-mode="pomodoro">Pomodoro</button>
+    <button class="tab" data-mode="short">Short Break</button>
+    <button class="tab" data-mode="long">Long Break</button>
+  </div>
+
+  <!-- Ring -->
+  <div class="ring-wrap" id="ringWrap">
+    <svg class="ring-svg" viewBox="0 0 300 300">
+      <circle class="ring-track" cx="150" cy="150" r="130"/>
+      <circle class="ring-progress" id="ringProgress" cx="150" cy="150" r="130"/>
+    </svg>
+    <div class="ring-center">
+      <div class="time-display" id="timeDisplay" aria-live="polite">25:00</div>
+      <div class="mode-label" id="modeLabel">Vapor session</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="btn-secondary" id="resetBtn" aria-label="Reset timer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="1 4 1 10 7 10"/>
+        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+      </svg>
+    </button>
+    <button class="btn-primary" id="startBtn">
+      <svg id="startIcon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+      <span id="startLabel">Start</span>
+    </button>
+    <div style="width:48px"></div>
+  </div>
+
+  <!-- Footer stats -->
+  <div class="footer-card">
+    <div class="footer-stat">
+      <span class="num" id="sessionCount">0</span>
+      <span class="label">Sessions today</span>
+    </div>
+    <div class="cycle-dots" id="cycleDots"></div>
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Settings overlay + panel -->
+<div class="overlay" id="overlay"></div>
+<aside class="settings-panel" id="settingsPanel" aria-label="Settings">
+  <div class="settings-head">
+    <h2>Settings</h2>
+    <button class="icon-btn" id="closeSettings" aria-label="Close settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="field-group">
+    <div class="group-title">Durations (minutes)</div>
+    <div class="field-row">
+      <label for="durPomodoro">Pomodoro</label>
+      <input type="number" id="durPomodoro" min="1" max="180">
+    </div>
+    <div class="field-row">
+      <label for="durShort">Short break</label>
+      <input type="number" id="durShort" min="1" max="60">
+    </div>
+    <div class="field-row">
+      <label for="durLong">Long break</label>
+      <input type="number" id="durLong" min="1" max="90">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <div class="group-title">Behavior</div>
+    <div class="field-row">
+      <label for="toggleAutoSwitch">Auto-switch mode</label>
+      <div class="switch" id="toggleAutoSwitch" role="switch" tabindex="0"><div class="knob"></div></div>
+    </div>
+    <div class="field-row">
+      <label for="toggleAutoStart">Auto-start next session</label>
+      <div class="switch" id="toggleAutoStart" role="switch" tabindex="0"><div class="knob"></div></div>
+    </div>
+    <div class="field-row">
+      <label for="toggleSound">Sound on completion</label>
+      <div class="switch" id="toggleSound" role="switch" tabindex="0"><div class="knob"></div></div>
+    </div>
+    <div class="field-row">
+      <label for="toggleNotif">Browser notifications</label>
+      <div class="switch" id="toggleNotif" role="switch" tabindex="0"><div class="knob"></div></div>
+    </div>
+  </div>
+
+  <button class="btn-save" id="saveSettings">Save changes</button>
+  <p class="hint">Space — start or pause · R — reset. Preferences and progress are saved on this device.</p>
+</aside>
+</body>
+<script src="script.js"></script>
+</html>
